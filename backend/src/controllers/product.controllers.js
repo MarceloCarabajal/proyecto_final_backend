@@ -1,7 +1,9 @@
 // import ProductManager from "../dao/mongodb/product.dao";
 // const productManager = new ProductManager();
 import * as service from "../services/product.service.js";
+import * as userService from "../services/user.service.js";
 import { HttpResponse } from "../utils/http.response.js";
+import { sendEmail } from "../services/mailing/mailing.service.js";
 
 const httpResponse = new HttpResponse();
 
@@ -158,7 +160,7 @@ export const updateProduct = async (req, res, next) => {
 export const deleteProduct = async (req, res, next) => {
     try {
         const { id } = req.params;
-        const user = req.user; //Ya que el middleware JWT añade esta información
+        const user = req.user; //Ya que el middleware JWT añade esta información     
         const role = user.role;
         const product = await service.getById(id);
 
@@ -169,7 +171,7 @@ export const deleteProduct = async (req, res, next) => {
         const owner = product.owner;
 
         //Verificar si el usuario es el propietario del producto o si es admin
-        if(owner!== user._id && role!== 'admin'){
+        if(!owner.equals(user._id) && role!== 'admin'){
             return httpResponse.Unauthorized(res, null, "You can't delete another owner's product");
         }
 
@@ -178,6 +180,12 @@ export const deleteProduct = async (req, res, next) => {
         if(!deleteProduct) {
             return httpResponse.NotFound(res, null, "Error deleting product");
             // res.status(404).json({msg: 'Error deleting product'});
+        }
+
+        //Si el producto fue eliminado y el propietario es premium, enviar un email
+        const ownerUser = await userService.getById(owner);
+        if(ownerUser && ownerUser.role === 'premium') {
+            await sendEmail(ownerUser, "premium");
         }
         
         return httpResponse.Ok(res, deleteProduct);

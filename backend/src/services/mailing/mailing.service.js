@@ -32,6 +32,8 @@ export const sendEmail = async (user, service, token = null) => {
         ? (msg = passwordResetTemplate(first_name, token) )
         : service === 'lastConnection'
         ? (msg = inactiveTemplate(first_name) )
+        : service === 'premium'
+        ? (msg = `<h1>Producto premium borrado</h1>`)
         : (msg = "");
 
 
