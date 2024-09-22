@@ -6,6 +6,15 @@ import { sendEmail } from "../services/mailing/mailing.service.js";
 
 const httpResponse = new HttpResponse();
 
+export const getAllUsers = async (req, res, next) => {
+    try {
+        const users = await service.getAll();
+        return httpResponse.Ok(res, users);
+    } catch (error) {
+        next(error);
+    }
+}
+
 export const register = async (req, res, next ) => {
     try {
         const { email, password, role } = req.body;

@@ -6,6 +6,8 @@ import { checkAdmin, checkAdminOrPremium } from "../middlewares/checkRoleJwt.js"
 
 const router = Router();
 
+router.get("/", controller.getAllUsers);
+
 router.post("/register", controller.register);
 
 router.post('/login', controller.login);

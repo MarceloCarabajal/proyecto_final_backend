@@ -12,6 +12,14 @@ import { hasBeenMoreThanXTime } from "../utils/user.utils.js";
 const { userDao, cartDao } = persistence;
 const userRepository = new UserRepository();
 
+export const getAll = async () => {
+    try {
+        return await userRepository.getAll();
+    } catch (error) {
+        throw new Error(error.message);
+    }
+}
+
 export const register = async (user) => {
     try {
         const { email, password, role } = user;
