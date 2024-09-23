@@ -47,10 +47,11 @@ const prodLog = {
     ),
     transports: [
         new winston.transports.Console({ level: 'info'}),
-        new winston.transports.File({ 
-            filename: './logs/prodErrors.log', 
-            level: 'info' 
-        }),
+        // Crear archivo de logs en modo prod
+        // new winston.transports.File({ 
+        //     filename: './logs/prodErrors.log', 
+        //     level: 'info' 
+        // }),
     ]
 };
 
