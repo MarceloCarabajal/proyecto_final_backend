@@ -3,6 +3,7 @@ import config from '../../../envConfig.js';
 import { welcomeTemplate } from './templates/welcomeTemplate.js';
 import { passwordResetTemplate } from './templates/passwordResetTemplate.js';
 import { inactiveTemplate } from './templates/inactiveTemplate.js';
+import { productDeletedTemplate } from './templates/productDeletedTemplate.js';
 
 const transporter = createTransport({
     service: 'gmail',
@@ -21,9 +22,10 @@ const transporter = createTransport({
  * @param {*} token 
  * @returns 
  */
-export const sendEmail = async (user, service, token = null) => {
+export const sendEmail = async (user, product = null, service, token = null) => {
     try {
         const { first_name, email } = user;
+        const { title } = product || {};
         let msg = "";
 
         service === 'register' 
@@ -32,8 +34,8 @@ export const sendEmail = async (user, service, token = null) => {
         ? (msg = passwordResetTemplate(first_name, token) )
         : service === 'lastConnection'
         ? (msg = inactiveTemplate(first_name) )
-        : service === 'premium'
-        ? (msg = `<h1>Producto premium borrado</h1>`)
+        : service === 'premium' 
+        ? (msg = productDeletedTemplate(title) )
         : (msg = "");
 
 
@@ -49,14 +51,19 @@ export const sendEmail = async (user, service, token = null) => {
                 : service 
                 === 'lastConnection'
                 ? 'Marce Store - Inactive Account'
+                : service 
+                ==='premium'
+                ? 'Marce Store - Product deleted' 
                 : '',
             html: msg
         };
 
         const response = await transporter.sendMail(gmailOptions);
+        console.log('Mail sent to: ' + email + ', Response: ', response);
+        
         if(token) return token;
         console.log(' mail sent to ' + response)
     } catch (error) {
         throw new Error(error);
-    }
+    }       
 }

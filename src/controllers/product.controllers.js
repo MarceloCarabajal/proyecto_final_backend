@@ -184,8 +184,9 @@ export const deleteProduct = async (req, res, next) => {
 
         //Si el producto fue eliminado y el propietario es premium, enviar un email
         const ownerUser = await userService.getById(owner);
+
         if(ownerUser && ownerUser.role === 'premium') {
-            await sendEmail(ownerUser, "premium");
+            await sendEmail(ownerUser, product, "premium");
         }
         
         return httpResponse.Ok(res, deleteProduct);
