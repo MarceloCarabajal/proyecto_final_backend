@@ -9,11 +9,12 @@ export const info = {
         servers: [
             {
                 url: 'http://localhost:8080',
+                description: 'LocalHost server Development'
             },
-            // {
-            //     url: 'https://marcestore.herokuapp.com',
-            //     description: 'Production'
-            // }
+            {
+                url: 'https://proyecto-final-backend-3cvx3hsjz-marcelocarabajals-projects.vercel.app',
+                description: 'Vercel Deploy'
+            }
         ],
     },
     apis: ["./src/docs/*.yml"],

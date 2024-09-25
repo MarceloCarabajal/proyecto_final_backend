@@ -186,7 +186,7 @@ export const deleteProduct = async (req, res, next) => {
         const ownerUser = await userService.getById(owner);
 
         if(ownerUser && ownerUser.role === 'premium') {
-            await sendEmail(ownerUser, product, "premium");
+            await sendEmail(ownerUser, product, "premiumProductDeleted");
         }
         
         return httpResponse.Ok(res, deleteProduct);

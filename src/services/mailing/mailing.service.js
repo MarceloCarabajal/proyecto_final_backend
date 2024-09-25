@@ -52,7 +52,7 @@ export const sendEmail = async (user, product = null, service, token = null) => 
                 === 'lastConnection'
                 ? 'Marce Store - Inactive Account'
                 : service 
-                ==='premium'
+                ==='premiumProductDeleted'
                 ? 'Marce Store - Product deleted' 
                 : '',
             html: msg
@@ -60,7 +60,7 @@ export const sendEmail = async (user, product = null, service, token = null) => 
 
         const response = await transporter.sendMail(gmailOptions);
         console.log('Mail sent to: ' + email + ', Response: ', response);
-        
+
         if(token) return token;
         console.log(' mail sent to ' + response)
     } catch (error) {
