@@ -27,6 +27,9 @@ const PORT = config.PORT;
 //swagger
 const specs = swaggerJSDoc(info);
 
+// Servir los archivos estáticos de Swagger UI
+app.use('/docs', express.static(path.join(__dirname, '../node_modules/swagger-ui-dist')));
+
 //Configuracion de middlewares
 app.use('/docs', swaggerUI.serve, swaggerUI.setup(specs));
 app.use(express.json());
@@ -74,7 +77,7 @@ app.use(passport.initialize());
 
 //Configuro cors
 app.use(cors({ 
-    origin: config.REACT_APP, 
+    origin: ["https://proyecto-final-backend-gamma.vercel.app", config.REACT_APP], 
     credentials: true 
 }));
 
