@@ -3,11 +3,11 @@
 
 import persistence from "../persistence/dao/factory.js";
 import UserRepository from "../persistence/repository/user.repository.js";
-import { sendEmail } from "./mailing/mailing.service.js";
 import { generateToken } from "../middlewares/authJwt.js";
 import { createHash, isValidPassword } from "../utils/utils.js";
 import config from "../../envConfig.js";
 import { hasBeenMoreThanXTime } from "../utils/user.utils.js";
+import { sendEmail } from "./mailing/mailing.service.js";
 
 const { userDao, cartDao } = persistence;
 const userRepository = new UserRepository();
@@ -47,7 +47,7 @@ export const register = async (user) => {
             role: userRole //Asignar rol de usuario o admin
         };
 
-        await sendEmail(newUser, 'register');
+        await sendEmail(newUser, null, 'register');
 
         // Registrar el usuario en la base de datos
         return await userDao.register(newUser);
@@ -64,10 +64,11 @@ export const login = async (email, password) => {
             return null;
         }
         
-        const token = generateToken(user, '10m');
-
         // Actualizar última conexión del usuario
         await updateLastConnection(user._id);
+        
+        const token = generateToken(user, '10m');
+
         await userDao.update(user._id, { active: true });
 
         // Devolver usuario y token
@@ -159,7 +160,7 @@ export const checkUsersLastConnection = async () => {
                 if(user.last_connection && hasBeenMoreThanXTime(user.last_connection)){
                     //Si el último acceso fue hace más de 48 h, enviar correo de notificación y actualizar el campo last_connection
                     await userDao.update(user._id, { active: false });
-                    await sendEmail(user, 'lastConnection');
+                    await sendEmail(user, null, 'lastConnection');
                     usersInactive.push(user.email);
                 }
             }

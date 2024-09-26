@@ -2,7 +2,7 @@ import { createTransport } from 'nodemailer';
 import config from '../../../envConfig.js';
 import { welcomeTemplate } from './templates/welcomeTemplate.js';
 import { passwordResetTemplate } from './templates/passwordResetTemplate.js';
-import { inactiveTemplate } from './templates/inactiveTemplate.js';
+import { inactiveTemplate } from './templates/inactiveTemplate.js'; 
 import { productDeletedTemplate } from './templates/productDeletedTemplate.js';
 
 const transporter = createTransport({
@@ -34,13 +34,13 @@ export const sendEmail = async (user, product = null, service, token = null) => 
         ? (msg = passwordResetTemplate(first_name, token) )
         : service === 'lastConnection'
         ? (msg = inactiveTemplate(first_name) )
-        : service === 'premium' 
+        : service === 'premiumProductDeleted' 
         ? (msg = productDeletedTemplate(title) )
-        : (msg = "");
+        : (msg = "<p>No template found</p>");
 
 
         const gmailOptions = {
-            from: config.EMAIL_USER,
+            from: config.EMAIL_GMAIL,
             to: email,
             subject: service 
                 ==='register'
@@ -59,7 +59,6 @@ export const sendEmail = async (user, product = null, service, token = null) => 
         };
 
         const response = await transporter.sendMail(gmailOptions);
-        console.log('Mail sent to: ' + email + ', Response: ', response);
 
         if(token) return token;
         console.log(' mail sent to ' + response)

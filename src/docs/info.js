@@ -8,11 +8,11 @@ export const info = {
         },
         servers: [
             {
-                url: 'http://localhost:8080',
+                url: 'http://localhost:3000',
                 description: 'LocalHost server Development'
             },
             {
-                url: 'https://proyecto-final-backend-3cvx3hsjz-marcelocarabajals-projects.vercel.app',
+                url: 'https://proyecto-final-backend-gamma.vercel.app',
                 description: 'Vercel Deploy'
             }
         ],

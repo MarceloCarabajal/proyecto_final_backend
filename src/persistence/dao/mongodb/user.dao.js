@@ -4,7 +4,10 @@ export default class UserDaoMongoDB {
     register = async (user) => {
         try {
             const { email } = user;
+            console.log("User:", user);
+            
             const existUser = await UserModel.findOne({ email });
+            
             if(existUser) return null; // retorna null si el usuario ya existe
             return await UserModel.create(user);
         } catch (error) {

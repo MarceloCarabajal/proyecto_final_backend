@@ -17,10 +17,9 @@ export const getAllUsers = async (req, res, next) => {
 
 export const register = async (req, res, next ) => {
     try {
-        const { email, password, role } = req.body;
-
+        
         // Registrar el usuario y crear un carrito vacío
-        const user = await service.register({ email, password, role });
+        const user = await service.register(req.body);
 
         // validaciones
         if (!user) {
@@ -150,7 +149,7 @@ export const generateResetPassword = async (req, res, next) => {
         const user = req.user;
         const token = await service.generateResetPassword(user);
         if(token){
-            await sendEmail(user, 'resetPass', token);
+            await sendEmail(user, null, 'resetPass', token);
             res.cookie('tokenPass', token)
             return httpResponse.Ok(res, token)
         } else return httpResponse.BadRequest(res, 'Invalid credentials for reset password request');
