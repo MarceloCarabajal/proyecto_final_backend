@@ -52,22 +52,22 @@ components:
           first_name:
             type: string
             description: Nombre del usuario
-            example: Marcelo
+            example: Angel
           last_name:
             type: string
             description: Apellido del usuario
-            example: Sánchez
+            example: Di María
           email:
             type: string
             description: Correo electrónico del usuario
-            example: marc.sánchez@example.com
+            example: dimaria@dimaria.com
           age:
             type: number
             description: Edad del usuario
-            example: 30
+            example: 37
           password:
             type: string
             description: Contraseña del usuario
-            example: sad765sadf5asd7d6asd77asd
+            example: tu-propio-password
 
             

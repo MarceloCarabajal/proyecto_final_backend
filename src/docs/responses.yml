@@ -1,25 +1,109 @@
 components:
   schema:
     users:
+      GetAllUsers:
+        type: array
+        data:
+          properties:
+            first_name:
+              type: string
+              description: Nombre del usuario
+              example: Angel
+            last_name:
+              type: string
+              description: Apellido del usuario
+              example: Di María
+            email:
+              type: string
+              description: Correo electrónico del usuario
+              example: dimaria@gmail.com
+            age:
+              type: number
+              description: Edad del usuario
+              example: 37
+            role:
+              type: string
+              description: Rol del usuario
+              example: admin
+            cart:
+              type: object
+              description: Carrito del usuario
+              properties:
+                _id:
+                  type: string
+                  description: ID del carrito
+                  example: 66b8e06ce40231fd3327fd15
+                products:
+                  type: array
+                  items:
+                    type: object
+                    properties:
+                      product:
+                        type: object
+                        properties:
+                          _id:
+                            type: string
+                            description: ID del producto
+                            example: 607b758700465a1579664661
+                          title:
+                            type: string
+                            description: Nombre del producto
+                            example: Producto 1
+                          description:
+                            type: string
+                            description: Descripción del producto
+                            example: Producto de la categoría 1
+                          price:
+                            type: number
+                            description: Precio del producto
+                            example: 150.00
+                          img:
+                            type: string
+                            description: Imagen del producto
+                            example: []
+                          code:
+                            type: string
+                            description: Código del producto
+                            example: P001
+                          stock:
+                            type: number
+                            description: Stock del producto
+                            example: 100
+                          category:
+                            type: string
+                            description: Categoría del producto
+                            example: Category 1
+                          status:
+                            type: boolean
+                            description: Estado del producto
+                            example: true
+                          owner:
+                            type: string
+                            description: ID del usuario
+                            example: 607b758700465a1579664661
+                          __v:
+                            type: number
+                            description: Versión del producto
+                            example: 0
       Register:
         type: object
         properties:
           first_name:
             type: string
             description: Nombre del usuario
-            example: Marcelo
+            example: Angel
           last_name:
             type: string
             description: Apellido del usuario
-            example: Sánchez
+            example: Di María
           email:
             type: string
             description: Correo electrónico del usuario
-            example: marcio@example.com
+            example: dimaria@dimaria.com
           age:
             type: number
             description: Edad del usuario
-            example: 30
+            example: 37
           role:
             type: string
             description: Rol del usuario
@@ -31,7 +115,7 @@ components:
               _id:
                 type: string
                 description: ID del carrito
-                example: 5f7f7d7d7d7d7d7d7d7d7d7d7
+                example: 66b8e06ce40231fd3327fd15
               products:
                 type: array
                 items:
@@ -43,7 +127,7 @@ components:
                         _id:
                           type: string
                           description: ID del producto
-                          example: 5f7f7d7d7d7d7d7d7d7d7d7d
+                          example: 6667463565d20a3b5b847180
                         title:
                           type: string
                           description: Título del producto
@@ -98,7 +182,7 @@ components:
           password:
             type: string
             description: Contraseña del usuario
-            example: 1234567890
+            example: password-del-usuario
       LoginOk:
         type: object
         properties:
@@ -112,19 +196,19 @@ components:
           first_name:
             type: string
             description: Nombre del usuario
-            example: Marcelo
+            example: Angel
           last_name:
             type: string
             description: Apellido del usuario
-            example: Sánchez
+            example: Di María
           email:
             type: string
             description: Correo electrónico del usuario
-            example: Sánchez
+            example: dimaria@dimaria.com
           age:
             type: number
             description: Edad del usuario
-            example: 30
+            example: 37
           role:
             type: string
             description: Rol del usuario
@@ -136,7 +220,7 @@ components:
               _id:
                 type: string
                 description: ID del carrito
-                example: 5f7f7d7d7d7d7d7d7d7d7d7d7
+                example: 66b8e06ce40221fe2327fd15
               products:
                 type: array
                 items:
@@ -148,7 +232,7 @@ components:
                         _id:
                           type: string
                           description: ID del producto
-                          example: 5f7f7d7d7d7d7d7d7d7d7d7d
+                          example: 6667463565e20a3a5b847180
                         title:
                           type: string
                           description: Título del producto
@@ -284,11 +368,11 @@ components:
           owner:
             type: string
             description: ID del usuario
-            example: 5f7f7d7d7d7d7d7d7d7d7d7d
+            example: 66b8e9bb4b082e6e6ead3fce
           _id:
             type: string
             description: ID del producto
-            example: 5f7f7d7d7d7d7d7d7d7d7d7d
+            example: 6667463565d20a3a5b847182
           __v:
             type: number
             description: Versión del producto
@@ -300,7 +384,7 @@ components:
             _id:
               type: string
               description: ID del producto
-              example: 5f7f7d7d7d7d7d7d7d7d7d7d
+              example: 6667463565e20a3a5d847182
             title:
               type: string
               description: Título del producto
@@ -343,7 +427,7 @@ components:
           _id:
             type: string
             description: ID del producto
-            example: 5f7f7d7d7d7d7d7d7d7d7d7d
+            example: 6667463565e20a3a5b857182
           title:
             type: string
             description: Título del producto
@@ -398,7 +482,7 @@ components:
           _id:
             type: string
             description: ID del producto
-            example: 5f7f7d7d7d7d7d7d7d7d7d7d
+            example: 6667463665e20a3a5b847182
           title:
             type: string
             description: Título del producto
@@ -440,7 +524,7 @@ components:
             description: Versión del producto
             example: 0
         example:
-          _id: 5f7f7d7d7d7d7d7d7d7d7d7d
+          _id: 6667463565e20a3a5a847182
           title: Título del producto
           description: Descripción del producto
           price: 100
@@ -464,7 +548,7 @@ components:
             type: string
             description: No se encontró el ID en la base de datos
         example:
-          message: No se encontró el ID df3234234drdf3434243235df en la base de datos
+          message: No se encontró el ID 6667463565e40a3a5b847182 en la base de datos
     carts:
       Create:
         type: object
@@ -480,7 +564,7 @@ components:
                     _id:
                       type: string
                       description: ID del producto
-                      example: 5f7f7d7d7d7d7d7d7d7d7d7d
+                      example: 6667463565e20d3a5b847182
                     title:
                       type: string
                       description: Título del producto
@@ -524,7 +608,7 @@ components:
             example:
               products:
                 - product:
-                    _id: 5f7f7d7d7d7d7d7d7d7d7d7d
+                    _id: 6667463565e30a3a5b847182
                     title: Producto 1
                     description: Silla gamer con led
                     price: 400000
@@ -565,7 +649,7 @@ components:
             _id:
               type: string
               description: ID del carrito
-              example: 5f7f7d7d7d7d7d7d7d7d7d7d
+              example: 6667463565e20d3a5b847182
             products:
               type: array
               items:
@@ -577,7 +661,7 @@ components:
                       _id:
                         type: string
                         description: ID del producto
-                        example: 5f7f7d7d7d7d7d7d7d7d7d7d
+                        example: 6667464565e20a3a5b847182
                       title:
                         type: string
                         description: Título del producto
@@ -628,7 +712,7 @@ components:
           _id:
             type: string
             description: ID del carrito
-            example: 5f7f7d7d7d7d7d7d7d7d7d7d
+            example: 6667463565320a3a5b847182
           products:
             type: array
             items:
@@ -640,7 +724,7 @@ components:
                     _id:
                       type: string
                       description: ID del producto
-                      example: 5f7f7d7d7d7d7d7d7d7d7d7d
+                      example: 6667463565e20a3a5d847182
                     title:
                       type: string
                       description: Título del producto

@@ -11,10 +11,10 @@ export const info = {
                 url: 'http://localhost:3000',
                 description: 'LocalHost server Development'
             },
-            {
-                url: 'https://proyecto-final-backend-gamma.vercel.app',
-                description: 'Vercel Deploy'
-            }
+            // {
+            //     url: 'https://proyecto-final-backend-gamma.vercel.app',
+            //     description: 'Vercel Deploy'
+            // }
         ],
     },
     apis: ["./src/docs/*.yml"],
